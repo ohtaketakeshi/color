@@ -74,7 +74,13 @@ for v,c in zip(v_planes,c_planes):
         j = faces[:,1],
         k = faces[:,2],
         vertexcolor=c,
-        flatshading=True
+        lighting = dict(
+            ambient=1,
+            diffuse=0,
+            specular=0,
+            roughness=0,
+            fresnel=0
+        )
     )
     data.append(go_mesh)
     data.append(go_edge)
