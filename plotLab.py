@@ -60,16 +60,16 @@ for v,c in zip(v_planes,c_planes):
                 edge += [v[i*gridN+j], v[i*gridN + (j+1)], [None]*3]
     edge = np.array(edge)
     go_edge = go.Scatter3d(
-        x = edge[:,0],
-        y = edge[:,1],
-        z = edge[:,2],
+        x = edge[:,1],
+        y = edge[:,2],
+        z = edge[:,0],
         mode="lines",
         line=go.scatter3d.Line(color=('rgb(100,100,100)'))
     )
     go_mesh = go.Mesh3d(
-        x = v[:,0],
-        y = v[:,1],
-        z = v[:,2],
+        x = v[:,1],
+        y = v[:,2],
+        z = v[:,0],
         i = faces[:,0],
         j = faces[:,1],
         k = faces[:,2],
@@ -80,7 +80,18 @@ for v,c in zip(v_planes,c_planes):
     data.append(go_edge)
 
 layout = go.Layout(
-
+    scene = dict (
+        xaxis = dict (
+            range = [-127,127]
+        ),
+        yaxis = dict(
+            range = [-127,127]
+        ),
+        zaxis = dict(
+            range = [0,100]
+        )
+    )
 )
-fig = go.Figure(data=data)
+fig = go.Figure(data=data, layout=layout)
+print("plot")
 plotly.offline.plot(fig)
